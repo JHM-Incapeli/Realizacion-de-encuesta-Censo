@@ -386,6 +386,65 @@ public class BuscarPersona extends JPanel{
             }
         });
         
+        JPopupMenu meEmergente = new JPopupMenu();
+        JSeparator nu1 = new JSeparator();
+        JSeparator nu2 = new JSeparator();
+        
+                                
+        JMenuItem btnMenus = new JMenuItem("Menú");
+        btnMenus.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                removeAll();
+                updateUI();
+
+                Principal prin = new Principal();
+
+                add(prin.Componente());
+                meEmergente.removeAll();
+            }
+            
+        });
+        JMenuItem btnTAbla = new JMenuItem("Tabla de registrados");
+        btnTAbla.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                removeAll();
+                updateUI();
+                DatosPersona dar = new DatosPersona();
+                add(dar.componentes());
+                meEmergente.removeAll();
+            }
+            
+        });
+        
+        
+        JMenuItem eliminarPerso = new JMenuItem("Eliminar persona");
+        eliminarPerso.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                
+                removeAll();
+                updateUI();
+                
+                EliminarPersona prin = new EliminarPersona();
+
+                add(prin.conponente());
+                
+                meEmergente.removeAll();
+            }
+            
+        });
+                    
+        meEmergente.add(btnMenus);
+        meEmergente.add(nu1);
+        meEmergente.add(btnTAbla);
+        meEmergente.add(nu2);
+        meEmergente.add(eliminarPerso);
+
+        setComponentPopupMenu(meEmergente);
+        
+        
         return this;
     }// fin Jpanel de componentes
 

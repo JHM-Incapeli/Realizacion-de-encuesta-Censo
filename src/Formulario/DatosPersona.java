@@ -2,30 +2,23 @@
 package Formulario;
 
 /**
- *@Autores CARLOS ANDRES CONEO DIAZ
- *          ANDRES FABIAN BURGOS DE LAS SALAS 
+ *@Autor
  *          JAVIER ANDRES HERRERA MANJARREZ
  */
 import javax.swing.*;
 import java.awt.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.BufferedReader;
-import java.io.IOException;
 
 public class DatosPersona extends JPanel{
     
-  
-
-    DefaultTableModel modelo;
+    VeriFicacion veri = new VeriFicacion();
+    JScrollPane scrull;
+    //DefaultTableModel modelo;
     JTable tabla;
     
-    File archivo;
-    FileReader leer;
-    BufferedReader almacenamiento;
 
     public DatosPersona() {
         setLayout(null);
@@ -104,101 +97,182 @@ public class DatosPersona extends JPanel{
         panelDeArriva.add(btnBuscar);
         
         
-
-        modelo = new DefaultTableModel(){
-            //  para que no se pueda editar la tabla
-        @Override
-            public boolean isCellEditable(int row, int column){
-
-            return false;
-            }
-        };
-        modelo.addColumn("Nombre(s)");
-        modelo.addColumn("Apellidos");
-        modelo.addColumn("Sexo");
-        modelo.addColumn("Fecha de nacimiento");
-        modelo.addColumn("Nivel de estudios");
-        modelo.addColumn("Altura");
-        modelo.addColumn("Edad");
-        modelo.addColumn("Estado militar ");
-        modelo.addColumn("IDN");
-        modelo.addColumn("Fecha del censo");
-        modelo.addColumn("Departamento y población");
-        modelo.addColumn("Calle y N°Casa");
-        
-        String cadena="";
-        archivo = new File("Usuarios.txt");
-        String[] datos= new String[12];
-        try{
-            leer = new FileReader(archivo);
-            // abrir el archivo que se le estraeran los datos
-            almacenamiento = new BufferedReader(leer);
-            //     Para obtener las lineas de testo de archivo
-            while(cadena!=null){
-                try{
-                    cadena = almacenamiento.readLine();
-                    datos[0]= cadena;
-                    datos[1]= almacenamiento.readLine();
-                    datos[2]= almacenamiento.readLine();
-                    datos[3]= almacenamiento.readLine();
-                    datos[4]= almacenamiento.readLine();
-                    datos[5]= almacenamiento.readLine();
-                    datos[6]= almacenamiento.readLine();
-                    datos[7]= almacenamiento.readLine();
-                    datos[8]= almacenamiento.readLine();
-                    datos[9]= almacenamiento.readLine();
-                    datos[10]= almacenamiento.readLine();
-                    datos[11]= almacenamiento.readLine();
-                    
-                }catch(IOException ee){
-                
-                }
-                modelo.addRow(datos);
-            }
-            try{
-                //   cerrando bufer
-                almacenamiento.close();
-            }catch(IOException er){
-            
-            }
-            try{
-                //   serrando archivo
-                leer.close();
-            }catch(IOException er){
-            
-            }
-            
-        }catch(FileNotFoundException rr){
-        
-        }
         
         
-        int val[] = {200, 200, 100, 150, 100, 75, 75, 100, 100, 100, 200, 200};
-
-        //       color de las lines
-        tabla.setGridColor(new Color(95,130,255));
-        tabla.setForeground(new Color(0,0,0));
-        tabla.setFont(new Font("calibri",2,14));
+        tabla = (JTable) veri.nuevaTabla();
         
-        tabla.setModel(modelo);
-        //tabla.getTableHeader() obtener encabesado de la tabla
-        //       establece la altura de las filas
-        tabla.setRowHeight(25);
-        tabla.getTableHeader().setOpaque(false);
-        tabla.getTableHeader().setBackground(new Color(95,130,255));
-        tabla.getTableHeader().setFont(new Font("Calibri",2,14));
-        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        tabla.setAutoscrolls(true);
-        //   establese el ancho de las columnas
-        for (int p = 0; p < 12; p++) {
-            tabla.getColumnModel().getColumn(p).setPreferredWidth(val[p]);
-        }
-
-        JScrollPane scrull = new JScrollPane(tabla/*,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+        scrull = new JScrollPane(/*tabla,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 					JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS*/);
+        scrull.setViewportView(tabla);
         scrull.setBounds(0, 101, 885, 360);   
         add(scrull);
+        
+        
+        
+        JPopupMenu meEmergente = new JPopupMenu();
+        JSeparator nu1 = new JSeparator();
+        JSeparator nu2 = new JSeparator();
+        JSeparator nu3 = new JSeparator();
+        JSeparator nu4 = new JSeparator();
+        JSeparator nu5 = new JSeparator();
+        JSeparator nu6 = new JSeparator();
+        JSeparator nu7 = new JSeparator();
+        JSeparator nu8 = new JSeparator();
+        
+                                
+        JMenuItem btnMenus = new JMenuItem("Menú");
+        btnMenus.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                removeAll();
+                updateUI();
 
+                Principal prin = new Principal();
+
+                add(prin.Componente());
+                meEmergente.removeAll();
+            }
+            
+        });
+        JMenuItem btnTAbla = new JMenuItem("Tabla de registrados");
+        btnTAbla.setForeground(Color.black);
+        btnTAbla.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                removeAll();
+                updateUI();
+                DatosPersona dar = new DatosPersona();
+                add(dar.componentes());
+                meEmergente.removeAll();
+            }
+            
+        });
+        JMenuItem btnbuscar = new JMenuItem("Buscar persona");
+        btnbuscar.setForeground(Color.black);
+        btnbuscar.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                removeAll();
+                updateUI();
+                
+                BuscarPersona eee =new BuscarPersona();
+                add(eee.conponentes());
+                meEmergente.removeAll();
+            }
+            
+        });
+        
+        JMenuItem eliminarPerso = new JMenuItem("Eliminar persona");
+        eliminarPerso.setForeground(Color.black);
+        eliminarPerso.addActionListener((ActionEvent e) -> {
+            removeAll();
+            updateUI();
+            
+            EliminarPersona prin = new EliminarPersona();
+            
+            add(prin.conponente());
+            
+            meEmergente.removeAll();
+        });
+        
+        JMenu Otros = new JMenu("Otros");
+        Otros.setForeground(Color.black);
+        JMenuItem elimiFila = new JMenuItem("Eliminar fila seleccionada");
+        
+        elimiFila.setForeground(Color.red);
+        elimiFila.setFont(new Font("Arial",1,14));
+        elimiFila.addActionListener((ActionEvent eve) ->{
+            int filas= tabla.getSelectedRow();
+            if(filas==-1){
+                JOptionPane.showMessageDialog(null,"Debes seleccionar el trabajador a borrar");
+            }else{
+                
+                veri.elimiNarFila(filas);
+                tabla = (JTable) veri.nuevaTabla();
+                
+                scrull.setViewportView(tabla);
+                tabla.setComponentPopupMenu(meEmergente);
+            }
+            
+        });
+        
+        JMenuItem editaDatos = new JMenuItem("Editar fila seleccionada");
+        editaDatos.setForeground(Color.green);
+        editaDatos.setFont(new Font("Arial",1,14));
+        editaDatos.addActionListener((ActionEvent eve) ->{
+            int filas= tabla.getSelectedRow();
+            if(filas==-1){
+                JOptionPane.showMessageDialog(null,"Debes seleccionar el trabajador a borrar");
+            }else{
+                
+                veri.rescribirDatosDePersona(filas);
+                
+                tabla = (JTable) veri.nuevaTabla();
+                scrull.setViewportView(tabla);
+                tabla.setComponentPopupMenu(meEmergente);
+            }
+            
+        });
+        JMenuItem primerOrden = new JMenuItem("Ordenar Alfabético");
+        primerOrden.setForeground(Color.BLACK);
+        primerOrden.addActionListener((ActionEvent evv) ->{
+            int dato = 1;
+            veri.ordenarDatos(dato);
+            tabla = (JTable) veri.nuevaTabla();
+                
+            scrull.setViewportView(tabla);
+            tabla.setComponentPopupMenu(meEmergente);
+            
+        });
+        
+        
+        
+        JMenuItem segundoOrden = new JMenuItem("Invertir orden Alfabético");
+        segundoOrden.setForeground(Color.BLACK);
+        segundoOrden.addActionListener((ActionEvent even) ->{
+            int dato = 2;
+            veri.ordenarDatos(dato);
+            tabla = (JTable) veri.nuevaTabla();
+                
+            scrull.setViewportView(tabla);
+            tabla.setComponentPopupMenu(meEmergente);
+        });
+        
+        JMenuItem tercerOrden = new JMenuItem("Orden g...l...c.");
+        tercerOrden.setForeground(Color.BLACK);
+        tercerOrden.addActionListener((ActionEvent even) ->{
+            int dato = 3;
+            veri.ordenarDatos(dato);
+            tabla = (JTable) veri.nuevaTabla();
+                
+            scrull.setViewportView(tabla);
+            tabla.setComponentPopupMenu(meEmergente);
+        });
+        
+        Otros.add(elimiFila);
+        Otros.add(nu5);
+        Otros.add(editaDatos);
+        Otros.add(nu6);
+        Otros.add(primerOrden);
+        Otros.add(nu7);
+        Otros.add(segundoOrden); 
+        Otros.add(nu8);
+        Otros.add(tercerOrden);
+        
+        meEmergente.add(btnMenus);
+        meEmergente.add(nu1);
+        meEmergente.add(btnTAbla);
+        meEmergente.add(nu2);
+        meEmergente.add(btnbuscar);
+        meEmergente.add(nu3);
+        meEmergente.add(eliminarPerso);
+        meEmergente.add(nu4);
+        meEmergente.add(Otros);
+
+        setComponentPopupMenu(meEmergente);
+
+        tabla.setComponentPopupMenu(meEmergente);
+        scrull.setComponentPopupMenu(meEmergente);
         return this;
     }// fin de lpanel tabla
 

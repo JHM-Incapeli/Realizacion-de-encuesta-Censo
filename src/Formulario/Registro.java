@@ -2,8 +2,7 @@
 package Formulario;
 
 /**
- *@Autores CARLOS ANDRES CONEO DIAZ
- *          ANDRES FABIAN BURGOS DE LAS SALAS 
+ *@Autor
  *          JAVIER ANDRES HERRERA MANJARREZ
  */
 
@@ -132,7 +131,7 @@ public class Registro extends JPanel{
             public void keyTyped(KeyEvent e) {
                 char caracter = e.getKeyChar();//Comber a char
                 // Verificar si la tecla pulsada no es un digito
-                if ((Character.isDigit(caracter))) {//si el caracter es un nuemero
+                if (Character.isDigit(caracter)) {//si el caracter es un nuemero
                     e.consume();  // ignorar el evento de teclado 
                 }
             }
@@ -274,7 +273,7 @@ public class Registro extends JPanel{
        radEduMedia.setBackground(new Color(242,234,191));
        JRadioButton raEduSuperior = new JRadioButton("Superior");
        raEduSuperior.setBackground(new Color(242,234,191));
-       
+         
        //       para que solo se marque uno
        ButtonGroup selec = new ButtonGroup();
        selec.add(radEdubasica);
@@ -426,13 +425,18 @@ public class Registro extends JPanel{
                                             verifi=true;
                                             DNI = JOptionPane.showInputDialog(null, "Ingrese su número de identidad","212...");
                                             char archar[] = DNI.toCharArray();
-                                            int i=1;
+                                            
                                             for(char c: archar){  
-                                                if(Character.isLetter(c)&& i==1){
+                                                if(Character.isLetter(c)|| Character.isWhitespace(c)){
                                                    verifi=false;
-                                                   i+=1;
+                                                  
                                                    JOptionPane.showMessageDialog(null,"Por favor digite solo numeros","Error",JOptionPane.ERROR_MESSAGE);
+                                                   break;
                                                 }
+                                            }
+                                            if(DNI.length() >=13){
+                                                JOptionPane.showMessageDialog(null,"No debe contener más de 12 digitos","Error",JOptionPane.ERROR_MESSAGE);
+                                                verifi=false;
                                             }
                                        }
                                        catch(NullPointerException errr){
@@ -449,13 +453,18 @@ public class Registro extends JPanel{
                                            verifi=true;
                                             suitaMilitar  = JOptionPane.showInputDialog(null, "Ingrese su número\nde su taregeta libreta militar\nsi no la tiene digite cinco ceros 00000","212...");
                                             char archar[] = suitaMilitar.toCharArray();
-                                            int i=1;
+                                            
                                             for(char c: archar){  
-                                                if(Character.isLetter(c)&& i==1){
+                                                if(Character.isLetter(c) || Character.isWhitespace(c) ){
                                                    verifi=false;
-                                                   i+=1;
+                                                   
                                                    JOptionPane.showMessageDialog(null,"Por favor digite solo numeros","Error",JOptionPane.ERROR_MESSAGE);
+                                                   break;
                                                 }
+                                            }
+                                            if(suitaMilitar.length() >=13){
+                                                JOptionPane.showMessageDialog(null,"No debe contener más de 12 digitos","Error",JOptionPane.ERROR_MESSAGE);
+                                                verifi=false;
                                             }
                                        }
                                        catch(NullPointerException errr){
@@ -500,6 +509,10 @@ public class Registro extends JPanel{
                                    } catch (IOException ex) {
 
                                    }
+                                   int perra = 1;
+                                   VeriFicacion ver = new VeriFicacion();
+                                   ver.ordenarDatos(perra);
+                                   
                                    removeAll();
                                    updateUI();
                                    FinFormulario fin = new FinFormulario();

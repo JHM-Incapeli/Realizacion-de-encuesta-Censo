@@ -21,7 +21,7 @@ public class Principal extends JPanel{
     Registro regis = new Registro();
     DatosPersona tabla = new DatosPersona();
     public JPanel Componente() {
-        
+        JPopupMenu meEmergente = new JPopupMenu();
         /*
         La imagen de Java la alojaremos en un JLabel usando 
         para esto el método setIcon en el cual instanciaremos
@@ -92,7 +92,7 @@ public class Principal extends JPanel{
             public void actionPerformed(ActionEvent e){
                 removeAll();
                 updateUI(); // actualizar la interfaz de usuario
-
+                meEmergente.removeAll();
                 add(regis.Componente());
                 
             }// fin del actionperformed
@@ -107,7 +107,7 @@ public class Principal extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e){
                 
-                System.exit(-1);
+                System.exit(0);
                 
             }// fin del actionperformed
 
@@ -119,9 +119,74 @@ public class Principal extends JPanel{
             public void actionPerformed(ActionEvent even){
 		removeAll();
                 updateUI();
+                meEmergente.removeAll();
                 add(tabla.componentes());
             }
 	});// fin de un boton
+        
+        
+        
+        JSeparator nu2 = new JSeparator();
+        JSeparator nu3 = new JSeparator();
+        
+                                
+        
+        JMenuItem btnTAbla = new JMenuItem("Tabla de registrados");
+        btnTAbla.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                removeAll();
+                updateUI();
+                meEmergente.removeAll();
+                DatosPersona dar = new DatosPersona();
+                add(dar.componentes());
+                
+            }
+            
+        });
+        JMenuItem btnbuscar = new JMenuItem("Buscar persona");
+        btnbuscar.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                removeAll();
+                updateUI();
+                
+                BuscarPersona eee =new BuscarPersona();
+                add(eee.conponentes());
+                meEmergente.removeAll();
+            }
+            
+        });
+        
+        JMenuItem eliminarPerso = new JMenuItem("Eliminar persona");
+        eliminarPerso.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                
+                removeAll();
+                updateUI();
+                meEmergente.removeAll();
+                EliminarPersona prin = new EliminarPersona();
+
+                add(prin.conponente());
+                
+                
+            }
+            
+        });
+                    
+        
+        
+        meEmergente.add(btnTAbla);
+        meEmergente.add(nu2);
+        meEmergente.add(btnbuscar);
+        meEmergente.add(nu3);
+        meEmergente.add(eliminarPerso);
+
+        
+        
+        setComponentPopupMenu(meEmergente);
+        
         return this;
     }
 

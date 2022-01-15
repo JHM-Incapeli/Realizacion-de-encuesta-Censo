@@ -13,7 +13,7 @@ import javax.swing.*;
 import Formulario.Principal;
 import java.io.File;
 import java.io.IOException;
-
+import Formulario.VeriFicacion;
 
 
 public class Menu extends JFrame{
@@ -47,7 +47,9 @@ public class Menu extends JFrame{
             }
             
         }
-        
+        int perra = 1;
+        VeriFicacion ver = new VeriFicacion();
+        ver.ordenarDatos(perra);
     }
    
 }

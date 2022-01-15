@@ -1,36 +1,36 @@
+Yavier Marrugo
+Hernandez Manja
+Femenino
+20-10-2002
+Media
+1.8
+20
+000005
+110000000000
+16/10/2020
+Bolivar, Clemencia
+K23, N°34
 Javier Andres
 Herrera Manjarrez
 Masculino
 15-11-2002
 Superior
 1.8
-18
-00000
-1000000000
-14/10/2021
-Bolivar, Clemencia
-K12 N°21
-Andres Fabian
-Burgos de las salas
-Masculino
-11-6-2002
-Superior
-1.71
 19
 00000
-1000000000
-14/10/2021
-Bolivar, Cartagena
-K18 N°45
-Carlos Andres
-Coneo Diaz
-Masculino
-21-10-1996
-Superior
-1.76
-25
+1111111111
+18/11/2021
+Bolivar, Clemencia
+K23, N°34
+cavier Andres
+Herrera
+Indefinido
+4-5-2002
+Baja
+1.8
+17
 00000
-1000000000
-08/11/2021
-Bolivar, Cartagena
-K23, N°51
+123456789
+10/12/2021
+Bolivar, Clemencia
+K23, N°34
