@@ -14,12 +14,13 @@ import Formulario.Principal;
 import java.io.File;
 import java.io.IOException;
 import Formulario.VeriFicacion;
-
+import javax.swing.UIManager.LookAndFeelInfo;
 
 public class Menu extends JFrame{
     
     public Menu(){
-        setLayout(new GridLayout(1,1));        
+        //setLayout(new GridLayout(1,1));  
+        
         Principal panel = new Principal();
         add(panel.Componente());
         
@@ -28,6 +29,36 @@ public class Menu extends JFrame{
     }
     
      public static void main(String args[]){
+        try {
+	   //Mirar y sentir información           obtener instalado Look And Feels
+            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                // UIManager = Administrador de interfaz de usuario
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+                /*
+                if ("Windows".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+                *//*
+                if ("Metal".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+                */
+            }
+        } catch (InstantiationException tte) {
+            // Si Nimbus no está disponible, puede configurar la interfaz gráfica de usuario con otro aspecto.
+        } catch (ClassNotFoundException ex) {
+            
+        } catch (IllegalAccessException ex) {
+            
+        } catch (UnsupportedLookAndFeelException ex) {
+            
+        }
+         
          
         Menu ventana = new Menu();
         ventana.setDefaultCloseOperation(EXIT_ON_CLOSE);

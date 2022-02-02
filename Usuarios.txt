@@ -1,13 +1,13 @@
-Yavier Marrugo
-Hernandez Manja
-Femenino
-20-10-2002
-Media
+cavier Andres
+Herrera
+Indefinido
+4-5-2002
+Baja
 1.8
-20
-000005
-110000000000
-16/10/2020
+17
+00000
+123456789
+10/12/2021
 Bolivar, Clemencia
 K23, N°34
 Javier Andres
@@ -22,15 +22,15 @@ Superior
 18/11/2021
 Bolivar, Clemencia
 K23, N°34
-cavier Andres
-Herrera
-Indefinido
-4-5-2002
-Baja
+Yavier Marrugo
+Hernandez Manja
+Femenino
+20-10-2002
+Media
 1.8
-17
-00000
-123456789
-10/12/2021
+20
+000005
+110000000000
+16/10/2020
 Bolivar, Clemencia
 K23, N°34
