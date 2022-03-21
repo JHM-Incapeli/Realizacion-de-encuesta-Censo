@@ -1,4 +1,5 @@
 
+
 package Formulario;
 
 /**
@@ -31,6 +32,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 import javax.swing.border.TitledBorder;
 public class VeriFicacion {
     
@@ -50,7 +52,7 @@ public class VeriFicacion {
     private     File archivo;
     private     FileReader leer;
     private     BufferedReader almacenamiento;
-    
+    private  ArrayList<String> todasLasLineas = new ArrayList<>();
     
     public VeriFicacion() {
     
@@ -68,7 +70,6 @@ public class VeriFicacion {
                 resultado=true;
                 break;
             }
-
         }
         vaciarArrais();
         return resultado;
@@ -91,41 +92,7 @@ public class VeriFicacion {
             while (cadena != null) {
                 try {
                     cadena = almacenamiento.readLine();
-                    ArrNombre.add(lon, cadena);
-
-                    cadena = almacenamiento.readLine();
-                    ArrApellidos.add(lon, cadena);
-
-                    cadena = almacenamiento.readLine();
-                    ArrSexo.add(lon, cadena);
-
-                    cadena = almacenamiento.readLine();
-                    ArrFeNacimiento.add(lon, cadena);
-
-                    cadena = almacenamiento.readLine();
-                    ArrEstudios.add(lon, cadena);
-
-                    cadena = almacenamiento.readLine();
-                    ArrAltura.add(lon, cadena);
-
-                    cadena = almacenamiento.readLine();
-                    ArrEdad.add(lon, cadena);
-
-                    cadena = almacenamiento.readLine();
-                    ArrEstMilitar.add(lon, cadena);
-
-                    cadena = almacenamiento.readLine();
-                    ArrIDN.add(lon, cadena);
-
-                    cadena = almacenamiento.readLine();
-                    ArrFechCenso.add(lon, cadena);
-
-                    cadena = almacenamiento.readLine();
-                    ArrDepaYPoblacion.add(lon, cadena);
-
-                    cadena = almacenamiento.readLine();
-                    ArrCalleYNcasa.add(lon, cadena);
-
+                    todasLasLineas.add(lon,cadena);
                     lon++;
                 } catch (IOException ee) {
 
@@ -147,6 +114,27 @@ public class VeriFicacion {
         } catch (FileNotFoundException rr) {
 
         }
+        
+        String[] datos= new String[12];
+        for (int i = 0; i < todasLasLineas.size() - 1; i++) {
+            String cadena2 = todasLasLineas.get(i);
+            datos = cadena2.split("¡");
+            ArrNombre.add(i,datos[0]);//1
+            ArrApellidos.add(i,datos[1]);//2
+            ArrSexo.add(i,datos[2]);//3
+            ArrFeNacimiento.add(i,datos[3]);//4
+            ArrEstudios.add(i,datos[4]);//5
+            ArrAltura.add(i,datos[5]);//6
+            ArrEdad.add(i,datos[6]);//7
+            ArrEstMilitar.add(i,datos[7]);//8
+            ArrIDN.add(i,datos[8]);//9
+            ArrFechCenso.add(i,datos[9]);//10
+            ArrDepaYPoblacion.add(i,datos[10]);//11
+            ArrCalleYNcasa.add(i,datos[11]);//12
+            
+        }
+        
+        
         
     }
 
@@ -170,7 +158,9 @@ public class VeriFicacion {
             ArrCalleYNcasa.remove(nun);//12
             rescribirArchivoTxt();
             vaciarArrais();
+            todasLasLineas.clear();
         }else{
+            todasLasLineas.clear();
             vaciarArrais();
         }
     }
@@ -208,6 +198,7 @@ public class VeriFicacion {
         String cadena="";
         archivo = new File("Usuarios.txt");
         String[] datos= new String[12];
+        int lon=0;
         try{
             leer = new FileReader(archivo);
             // abrir el archivo que se le estraeran los datos
@@ -215,24 +206,14 @@ public class VeriFicacion {
             //     Para obtener las lineas de testo de archivo
             while(cadena!=null){
                 try{
-                    cadena = almacenamiento.readLine();
-                    datos[0]= cadena;
-                    datos[1]= almacenamiento.readLine();
-                    datos[2]= almacenamiento.readLine();
-                    datos[3]= almacenamiento.readLine();
-                    datos[4]= almacenamiento.readLine();
-                    datos[5]= almacenamiento.readLine();
-                    datos[6]= almacenamiento.readLine();
-                    datos[7]= almacenamiento.readLine();
-                    datos[8]= almacenamiento.readLine();
-                    datos[9]= almacenamiento.readLine();
-                    datos[10]= almacenamiento.readLine();
-                    datos[11]= almacenamiento.readLine();
+                    
+                     cadena = almacenamiento.readLine();
+                     todasLasLineas.add(lon,cadena); lon++;
                     
                 }catch(IOException ee){
                 
                 }
-                modelo.addRow(datos);
+                //modelo.addRow(datos);
             }
             try{
                 //   cerrando bufer
@@ -251,7 +232,18 @@ public class VeriFicacion {
         
         }
         
-        int val[] = {200, 200, 100, 150, 100, 75, 75, 100, 100, 100, 200, 200};
+        
+        for (int i = 0; i < todasLasLineas.size() - 1; i++) {
+            String cadena2 = todasLasLineas.get(i);
+            if(cadena2 != null){
+                datos = cadena2.split("¡");
+
+                modelo.addRow(datos);
+            }
+        }
+         
+        
+        int val[] = {200, 200, 100, 150, 150, 75, 75, 100, 100, 100, 200, 200};
         
         
         
@@ -273,7 +265,8 @@ public class VeriFicacion {
         for (int p = 0; p < 12; p++) {
             tabla.getColumnModel().getColumn(p).setPreferredWidth(val[p]);
         }
-
+        
+        todasLasLineas.clear();
         return tabla;
     }/// fin metodo nueva tabla
 
@@ -305,18 +298,10 @@ public class VeriFicacion {
                 linea = new PrintWriter(escribir);// par aescribir en varias lineas de texto
 
                 if (ArrNombre.get(o) != null) {
-                    linea.println(ArrNombre.get(o));//1
-                    linea.println(ArrApellidos.get(o));//2
-                    linea.println(ArrSexo.get(o));//3
-                    linea.println(ArrFeNacimiento.get(o));//4
-                    linea.println(ArrEstudios.get(o));//5
-                    linea.println(ArrAltura.get(o));//6
-                    linea.println(ArrEdad.get(o));//7
-                    linea.println(ArrEstMilitar.get(o));//8
-                    linea.println(ArrIDN.get(o));//9
-                    linea.println(ArrFechCenso.get(o));//10
-                    linea.println(ArrDepaYPoblacion.get(o));//11
-                    linea.println(ArrCalleYNcasa.get(o));//12
+                    linea.println(ArrNombre.get(o)+"¡"+ArrApellidos.get(o)+"¡"+ArrSexo.get(o)+"¡"+ArrFeNacimiento.get(o)+"¡"
+                            +ArrEstudios.get(o)+"¡"+ArrAltura.get(o)+"¡"+ArrEdad.get(o)+"¡"+ArrEstMilitar.get(o)+"¡"
+                            +ArrIDN.get(o)+"¡"+ArrFechCenso.get(o)+"¡"+ArrDepaYPoblacion.get(o)+"¡"+ArrCalleYNcasa.get(o));//1
+
 
                 }
 
@@ -688,19 +673,20 @@ public class VeriFicacion {
                 @Override
                 public void keyTyped(KeyEvent e){
                     char caracter = e.getKeyChar();
-                    if (((caracter < '0') || (caracter > '9')) || Character.isWhitespace(caracter)) {
+                    if (!Character.isDigit(caracter) && caracter != '.') {
                         e.consume();
                     }
+                    if (caAltura.getText().contains(".") || caAltura.getText().length() ==0) {
+                        if (caracter == '.') {
+                            e.consume();
+                        }
+                    }
+
                     if (caAltura.getText().length() == 4) {
                         e.consume();
                     }
-                    boolean verif;
-                    if(caAltura.getText().contains(".")){
-                        verif=true;
-                        if(caracter== '.'){
-                         e.consume();
-                        }
-                    }
+                    
+                    
                 }  
             });
             ventanaEdit.add(caAltura);
@@ -797,6 +783,8 @@ public class VeriFicacion {
                 int confir = JOptionPane.showConfirmDialog(null,"Los cambios realizados no seran guardados", "Confirme", JOptionPane.YES_NO_OPTION, JOptionPane.DEFAULT_OPTION,icono);
                 if(confir == JOptionPane.YES_OPTION){
                     ventanaEdit.dispose();
+                    vaciarArrais();
+                    todasLasLineas.clear();
                 }
             });
             ventanaEdit.add(btncancelar);
@@ -822,10 +810,10 @@ public class VeriFicacion {
                     String depaYPobla = caDepaYpoblcion.getText();
                     String callNuCasa = caCalleYnuCasa.getText();
                     
-                    if(nombre.equals("") || nombre.equals(" ")  || apellido.equals("") || apellido.equals(" ") ||
-                            numeroIDN.equals("") || numeroIDN.equals(" ") || nuMilitar.equals("") || nuMilitar.equals(" ") ||
-                                altura.equals("") || altura.equals(" ") || edad.equals("") || edad.equals(" ") ||
-                                    depaYPobla.equals("") || depaYPobla.equals(" ") || callNuCasa.equals("") || callNuCasa.equals(" ")){
+                    if(nombre.equals("") || nombre.equals(" ") || nombre.endsWith(" ")  || apellido.equals("") || apellido.equals(" ") || apellido.endsWith(" ") ||
+                            numeroIDN.equals("") || numeroIDN.equals(" ") || numeroIDN.endsWith(" ") || nuMilitar.equals("") || nuMilitar.equals(" ") || nuMilitar.endsWith(" ") ||
+                                altura.equals("") || altura.equals(" ")|| altura.endsWith(" ") || edad.equals("") || edad.equals(" ") || edad.endsWith(" ") ||
+                                    depaYPobla.equals("") || depaYPobla.equals(" ") || depaYPobla.endsWith(" ") || callNuCasa.equals("") || callNuCasa.equals(" ")|| callNuCasa.endsWith(" ")){
                         String nn = "/img/discrepar.png";
                         Icon icons = new ImageIcon(getClass().getResource(nn));
                         JOptionPane.showMessageDialog(null, "Ninguno de los capos puede quedar vacios\no con un espacio en blanco","Aviso",JOptionPane.DEFAULT_OPTION,icons);
@@ -866,7 +854,7 @@ public class VeriFicacion {
                             educacion = "Superior";
                         }
                         
-                        fechaNAcimeiento = String.valueOf(spidia.getValue())+"-"+String.valueOf(spiMes.getValue())+"-"+String.valueOf(spiAAAa.getValue());;
+                        fechaNAcimeiento = String.valueOf(spidia.getValue())+"-"+String.valueOf(spiMes.getValue())+"-"+String.valueOf(spiAAAa.getValue());
                         fechaCEnco = String.valueOf(spidi.getValue())+"/"+String.valueOf(spiMe.getValue())+"/"+String.valueOf(spiAAA.getValue());;
                         ArrNombre.add(num,nombre); //1
                         ArrApellidos.add(num,apellido); //2
@@ -883,6 +871,7 @@ public class VeriFicacion {
                         
                         rescribirArchivoTxt();
                         vaciarArrais();
+                        todasLasLineas.clear();
                         ventanaEdit.dispose();
                     }
 
@@ -893,6 +882,8 @@ public class VeriFicacion {
             
             
             // propiedades del JDialog
+            // evita que el boton cerrar de la cometa alguna acción
+            ventanaEdit.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
             ventanaEdit.setSize(997, 600);
             ventanaEdit.setResizable(false);
             ventanaEdit.setTitle("Edición");
@@ -927,6 +918,7 @@ public class VeriFicacion {
         
         // vaciar los otros arraris
         vaciarArrais();
+        todasLasLineas.clear();
         
         char letras[] = new char[27];
         
@@ -952,7 +944,7 @@ public class VeriFicacion {
         }
         for(int i=0; i<=letras.length-1; i++){
             //System.out.println(i+")"+letras[i]);
-            for (int p = 0; p < ArrNombr.size()-1; p++) {  
+            for (int p = 0; p < ArrNombr.size(); p++) {  
                 
                 char letr[] = ArrNombr.get(p).toCharArray();
                 String compa = String.valueOf(letr[0]);

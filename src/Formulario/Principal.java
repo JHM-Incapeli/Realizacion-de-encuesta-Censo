@@ -31,6 +31,7 @@ public class Principal extends JPanel{
         JLabel imagen= new JLabel();
         imagen.setIcon(new ImageIcon(getClass().getResource("/imagenes/edificio-del-gobierno.png")));
         imagen.setBounds(752,10,128,128);
+        imagen.setBorder(BorderFactory.createLineBorder(Color.yellow));
         add(imagen);
         
         JLabel image= new JLabel();
@@ -92,6 +93,7 @@ public class Principal extends JPanel{
             public void actionPerformed(ActionEvent e){
                 removeAll();
                 updateUI(); // actualizar la interfaz de usuario
+                
                 meEmergente.removeAll();
                 add(regis.Componente());
                 
