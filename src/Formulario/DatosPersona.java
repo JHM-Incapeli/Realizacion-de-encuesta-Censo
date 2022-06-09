@@ -104,6 +104,7 @@ public class DatosPersona extends JPanel{
         scrull = new JScrollPane(/*tabla,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 					JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS*/);
         scrull.setViewportView(tabla);
+        scrull.getViewport().setBackground(Color.WHITE);
         scrull.setBounds(0, 101, 885, 360);   
         add(scrull);
         

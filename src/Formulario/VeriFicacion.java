@@ -729,7 +729,9 @@ public class VeriFicacion {
             caDepaYpoblcion.setForeground(Color.BLACK);
             caDepaYpoblcion.setFont(new Font("Arial",1,18));
             caDepaYpoblcion.setBounds(558,317,380,55);
-            caDepaYpoblcion.setBorder(BorderFactory.createLineBorder(new Color(246, 252, 243)));
+            caDepaYpoblcion.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(246, 252, 243)),
+                    "Departamento y pobalción", TitledBorder.CENTER, TitledBorder.CENTER, new Font("calibri",1, 16),
+                    Color.black));
             caDepaYpoblcion.addKeyListener(new KeyAdapter(){
                 @Override
                 public void keyTyped(KeyEvent e){
@@ -755,7 +757,9 @@ public class VeriFicacion {
             caCalleYnuCasa.setForeground(Color.BLACK);
             caCalleYnuCasa.setFont(new Font("Arial",1,18));
             caCalleYnuCasa.setBounds(558,380,380,55);
-            caCalleYnuCasa.setBorder(BorderFactory.createLineBorder(new Color(246, 252, 243)));
+            caCalleYnuCasa.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(246, 252, 243)),
+                    "Calle y numero de casa", TitledBorder.CENTER, TitledBorder.CENTER, new Font("calibri", 1, 16),
+                    Color.black));
             caCalleYnuCasa.addKeyListener(new KeyAdapter(){
                 @Override
                 public void keyTyped(KeyEvent e){
